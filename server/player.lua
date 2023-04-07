@@ -204,14 +204,14 @@ CreatePlayer = function(src, dbdata)
 
     -- Functions
     self.func = {}
-    self.func.SetMoney = function(type, amount)
+    self.SetMoney = function(type, amount)
         if self.money[type] then
             self.money[type] = amount
             Player(self.source).state:set(type, self.money[type], true)
         end
     end
 
-    self.func.AddMoney = function(type, amount)
+    self.AddMoney = function(type, amount)
         if self.money[type] then
             self.money[type] = self.money[type] + amount
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, false)
@@ -219,7 +219,7 @@ CreatePlayer = function(src, dbdata)
         end
     end
 
-    self.func.RemoveMoney = function(type, amount)
+    self.RemoveMoney = function(type, amount)
         if self.money[type] then
             self.money[type] = self.money[type] - amount
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, true)
@@ -227,36 +227,36 @@ CreatePlayer = function(src, dbdata)
         end
     end
 
-    self.func.SetJob = function(job, rank)
+    self.SetJob = function(job, rank)
         self.job.name = job
         self.job.rank = rank
         Player(self.source).state:set("job", self.job, true)
     end
 
-    self.func.SetGang = function(gang, rank)
+    self.SetGang = function(gang, rank)
         self.gang.name = gang
         self.gang.rank = rank
         Player(self.source).state:set("gang", self.gang, true)
     end
 
-    self.func.SetMetaData = function(key, value)
+    self.SetMetaData = function(key, value)
         self.metadata[key] = value
         Player(self.source).state:set("metadata", self.metadata, true)
     end
 
-    self.func.SetSkinData = function(data) 
+    self.SetSkinData = function(data) 
         self.skin = data
     end
 
-    self.func.SetClothesData = function(data)
+    self.SetClothesData = function(data)
         self.clothes = data
     end
 
-    self.func.Save = function()
+    self.Save = function()
         RPX.Player.Save(self.source)
     end
 
-    self.func.UpdateStateBags = function()
+    self.UpdateStateBags = function()
         RPX.UpdateStateBags(self.source)
     end
 

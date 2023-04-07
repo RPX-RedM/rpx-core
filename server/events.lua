@@ -43,8 +43,8 @@ RegisterNetEvent('RPX:UpdatePlayer', function()
         if newThirst <= 0 then
             newThirst = 0
         end
-        thePlayer.func.SetMetaData('thirst', tonumber(string.format("%.2f", newThirst)))
-        thePlayer.func.SetMetaData('hunger', tonumber(string.format("%.2f", newHunger)))
+        thePlayer.SetMetaData('thirst', tonumber(string.format("%.2f", newThirst)))
+        thePlayer.SetMetaData('hunger', tonumber(string.format("%.2f", newHunger)))
 
         RPX.Player.Save(src)
 

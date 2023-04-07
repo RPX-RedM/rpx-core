@@ -10,7 +10,7 @@ TP = function(source, args, rawCommand)
             if DoesEntityExist(GetPlayerPed(args[1])) then
                 local toCoords = GetEntityCoords(GetPlayerPed(args[1]))
                 SetEntityCoords(GetPlayerPed(source), toCoords)
-                RPX.func.pNotifyRight(source, "Teleported to "..GetPlayerName(args[1]).." ["..args[1].."]", 3000)
+                RPX.pNotifyRight(source, "Teleported to "..GetPlayerName(args[1]).." ["..args[1].."]", 3000)
             else
                 RPX.pNotifyRight(source, "Player offline?", 3000)
             end
@@ -77,9 +77,9 @@ RegisterCommand("feedme", function(source, args, rawCommand)
     local Player = RPX.GetPlayer(source)
     if not Player then return end
     if Player.permissiongroup == "admin" or Player.permissiongroup == "superadmin" then
-        Player.func.SetMetaData("hunger", 100)
-        Player.func.SetMetaData("thirst", 100)
-        Player.func.SetMetaData("stress", 0)
+        Player.SetMetaData("hunger", 100)
+        Player.SetMetaData("thirst", 100)
+        Player.SetMetaData("stress", 0)
         RPX.pNotifyRight(source, "Fed and watered.", 3000)
     else
         RPX.pNotifyRight(source, "Insufficient permissions.", 3000)
@@ -299,7 +299,7 @@ RegisterCommand("setjob", function(source, args, rawCommand)
                 if Target then
                     local job, rank = args[2], args[3]
 
-                    Target.func.SetJob(job, rank)
+                    Target.SetJob(job, rank)
 
                     TriggerClientEvent("redem_roleplay:JobChange", tonumber(args[1]), job)
                     RPX.pNotifyRight(source, "Set "..Target.charinfo.fullname.."'s job to "..job.." (Rank "..rank..")", 3000)
@@ -325,7 +325,7 @@ RegisterCommand("setgang", function(source, args, rawCommand)
                 if Target then
                     local gang, rank = args[2], args[3]
 
-                    Target.func.SetGang(gang, rank)
+                    Target.SetGang(gang, rank)
 
                     TriggerClientEvent("redem_roleplay:GangChange", tonumber(args[1]), gang)
                     RPX.pNotifyRight(source, "Set "..Target.charinfo.fullname.."'s gang to "..gang.." (Rank "..rank..")", 3000)
@@ -352,7 +352,7 @@ RegisterCommand("addmoney", function(source, args, rawCommand)
                     local amount = tonumber(args[2])
                     if amount > 0 then
 
-                        Target.func.AddMoney("cash", tonumber(args[2]))
+                        Target.AddMoney("cash", tonumber(args[2]))
 
                         RPX.pNotifyRight(source, "Added <strong style=\"color:lime\">$".. RPX.CommaValue(string.format("%.2f", args[2])).."</strong> to ".. Target.charinfo.fullname .."!", 3000)
                         RPX.pNotifyRight(tonumber(args[1]), "Staff gave you <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong>!", 3000)
@@ -380,7 +380,7 @@ RegisterCommand("addbankmoney", function(source, args, rawCommand)
                     local amount = tonumber(args[2])
                     if amount > 0 then
 
-                        Target.func.AddMoney("bank", tonumber(args[2]))
+                        Target.AddMoney("bank", tonumber(args[2]))
 
                         RPX.pNotifyRight(source, "Added <strong style=\"color:lime\">$".. RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank to ".. Target.charinfo.fullname .."!", 3000)
                         RPX.pNotifyRight(tonumber(args[1]), "Staff gave you <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank money!", 3000)
