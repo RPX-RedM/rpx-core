@@ -203,7 +203,6 @@ CreatePlayer = function(src, dbdata)
     self.position = dbdata.position or Internal_Config.Player.DefaultPosition
 
     -- Functions
-    self.func = {}
     self.SetMoney = function(type, amount)
         if self.money[type] then
             self.money[type] = amount
