@@ -6,6 +6,15 @@ RPX.GetPlayer = function(src)
     return nil
 end
 
+RPX.GetPlayerByCitizenId = function(citizenId)
+    for _,player in pairs(RPX.Players) do
+        if player.citizenid == citizenId then
+            return player
+        end
+    end
+    return nil
+end
+
 RPX.Player.GetCharacters = function(src)
     local license = GetPlayerIdentifierByType(src, "license")
     local result = MySQL.Sync.fetchAll('SELECT * FROM characters WHERE license = ? ORDER BY slot', { license })
@@ -188,15 +197,15 @@ CreatePlayer = function(src, dbdata)
 
     self.job = dbdata.job or {}
     self.job.name = self.job.name or "unemployed" -- Default job
-    self.job.rank = self.job.rank or 0 -- Default rank
+    self.job.rank = tonumber(self.job.rank) or 0 -- Default rank
 
     self.gang = dbdata.gang or {}
     self.gang.name = self.gang.name or "none" -- Default gang
-    self.gang.rank = self.gang.rank or 0 -- Default rank
+    self.gang.rank = tonumber(self.gang.rank) or 0 -- Default rank
 
     self.money = dbdata.money or {}
-    self.money.cash = self.money.cash or Internal_Config.Player.StartingCash
-    self.money.bank = self.money.bank or Internal_Config.Player.StartingBank
+    self.money.cash = tonumber(self.money.cash) or Internal_Config.Player.StartingCash
+    self.money.bank = tonumber(self.money.bank) or Internal_Config.Player.StartingBank
 
     self.metadata = dbdata.metadata
     if self.metadata == nil then self.metadata = {} end
@@ -218,7 +227,7 @@ CreatePlayer = function(src, dbdata)
 
     self.AddMoney = function(type, amount)
         if self.money[type] then
-            self.money[type] = self.money[type] + amount
+            self.money[type] = self.money[type] + tonumber(amount)
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, false)
             Player(self.source).state:set(type, self.money[type], true)
         end
@@ -226,7 +235,7 @@ CreatePlayer = function(src, dbdata)
 
     self.RemoveMoney = function(type, amount)
         if self.money[type] then
-            self.money[type] = self.money[type] - amount
+            self.money[type] = self.money[type] - tonumber(amount)
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, true)
             Player(self.source).state:set(type, self.money[type], true)
         end
@@ -234,14 +243,16 @@ CreatePlayer = function(src, dbdata)
 
     self.SetJob = function(job, rank)
         self.job.name = job
-        self.job.rank = rank
-        Player(self.source).state:set("job", self.job, true)
+        self.job.rank = tonumber(rank)
+        Player(self.source).state:set("job", self.job.name, true)
+        Player(self.source).state:set("jobrank", self.job.rank, true)
     end
 
     self.SetGang = function(gang, rank)
         self.gang.name = gang
-        self.gang.rank = rank
-        Player(self.source).state:set("gang", self.gang, true)
+        self.gang.rank = tonumber(rank)
+        Player(self.source).state:set("gang", self.gang.name, true)
+        Player(self.source).state:set("gangrank", self.gang.rank, true)
     end
 
     self.SetMetaData = function(key, value)
