@@ -1,5 +1,5 @@
 IC = {}
-IC.MaxPlayers 							= GetConvarInt('sv_maxclients', 48)
+IC.MaxPlayers 							= GetConvarInt('sv_maxClients', 48)
 IC.DefaultPosition 						= vector3(0.0,0.0,0.0)
 IC.CitizenIDLength 						= 8
 IC.DeploymentType						= "dev" 		-- dev, prod
