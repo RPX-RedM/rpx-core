@@ -222,6 +222,9 @@ CreatePlayer = function(src, dbdata)
         if self.money[type] then
             self.money[type] = amount
             Player(self.source).state:set(type, self.money[type], true)
+            if type == "cash" then
+                TriggerEvent("SERVER:RPX:OnCashChanged", self.source, self.money[type])
+            end
         end
     end
 
@@ -230,6 +233,9 @@ CreatePlayer = function(src, dbdata)
             self.money[type] = self.money[type] + tonumber(amount)
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, false)
             Player(self.source).state:set(type, self.money[type], true)
+            if type == "cash" then
+                TriggerEvent("SERVER:RPX:OnCashChanged", self.source, self.money[type])
+            end
         end
     end
 
@@ -238,6 +244,9 @@ CreatePlayer = function(src, dbdata)
             self.money[type] = self.money[type] - tonumber(amount)
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, true)
             Player(self.source).state:set(type, self.money[type], true)
+            if type == "cash" then
+                TriggerEvent("SERVER:RPX:OnCashChanged", self.source, self.money[type])
+            end
         end
     end
 

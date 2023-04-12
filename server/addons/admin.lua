@@ -274,8 +274,8 @@ RegisterCommand("setmoney", function(source, args, rawCommand)
 
                         Target.SetMoney("cash", tonumber(args[2]))
 
-                        RPX.pNotifyRight(source, "Set ".. Player.charinfo.fullname .."'s cash to <strong style=\"color:lime\">$".. RPX.CommaValue(string.format("%.2f", count)).."</strong>!", 3000)
-                        RPX.pNotifyRight(tonumber(args[1]), "Staff set your cash to <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", count)).."</strong>!", 3000)
+                        RPX.pNotifyRight(source, "Set ".. Player.charinfo.fullname .."'s cash to <strong style=\"color:lime\">$".. RPX.CommaValue(string.format("%.2f", amount)).."</strong>!", 3000)
+                        RPX.pNotifyRight(tonumber(args[1]), "Staff set your cash to <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", amount)).."</strong>!", 3000)
                     end
                 else
                     RPX.pNotifyRight(source, "Player not found or isn't logged in.", 3000)

@@ -55,3 +55,63 @@ RegisterNetEvent('RPX:UpdatePlayer', function()
         end
     end
 end)
+
+RegisterNetEvent('RPX:SetHunger', function(amount)
+    local src = source
+    local thePlayer = RPX.Players[src]
+    if thePlayer then
+        local oldHunger = thePlayer.metadata['hunger']
+        local newHunger = amount
+        if newHunger >= 100 then
+            newHunger = 100
+        end
+        thePlayer.SetMetaData('hunger', tonumber(string.format("%.2f", newHunger)))
+
+        RPX.Player.Save(src)
+
+        if GlobalState.DeploymentType == "dev" then
+            print("RPX:SetHunger for "..thePlayer.name.." ("..src..")")
+            print("Setting hunger from "..oldHunger.." to "..newHunger)
+        end
+    end
+end)
+
+RegisterNetEvent('RPX:SetThirst', function(amount)
+    local src = source
+    local thePlayer = RPX.Players[src]
+    if thePlayer then
+        local oldThirst = thePlayer.metadata['thirst']
+        local newThirst = amount
+        if newThirst >= 100 then
+            newThirst = 100
+        end
+        thePlayer.SetMetaData('thirst', tonumber(string.format("%.2f", newThirst)))
+
+        RPX.Player.Save(src)
+
+        if GlobalState.DeploymentType == "dev" then
+            print("RPX:SetThirst for "..thePlayer.name.." ("..src..")")
+            print("Setting thirst from "..oldThirst.." to "..newThirst)
+        end
+    end
+end)
+
+RegisterNetEvent('RPX:SetStress', function(amount)
+    local src = source
+    local thePlayer = RPX.Players[src]
+    if thePlayer then
+        local oldStress = thePlayer.metadata['stress']
+        local newStress = amount
+        if newStress >= 100 then
+            newStress = 100
+        end
+        thePlayer.SetMetaData('stress', tonumber(string.format("%.2f", newStress)))
+
+        RPX.Player.Save(src)
+
+        if GlobalState.DeploymentType == "dev" then
+            print("RPX:SetStress for "..thePlayer.name.." ("..src..")")
+            print("Setting stress from "..oldStress.." to "..newStress)
+        end
+    end
+end)

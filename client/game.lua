@@ -29,6 +29,7 @@ if Internal_Config.Game.HideHUD then
         Wait(500)
         for i=0, 11 do
             RPX.IN(0xC116E6DF68DCE667, i, 2)
+            RPX.IN(0x1B3DA717B9AFF828, true)
         end
         return
     end)

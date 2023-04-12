@@ -16,6 +16,7 @@ version '0.0.1'
 shared_scripts {
     'config.lua',
     'shared/debug.lua',
+    'shared/jobs.lua',
     'shared/blips.lua',
     'shared/items.lua',
 }
@@ -27,8 +28,7 @@ server_scripts {
     'server/player.lua',
     'server/events.lua',
     'server/functions.lua',
-    'server/addons/logs.lua',
-    'server/addons/admin.lua',
+    'server/addons/*.lua',
 }
 
 client_scripts {
@@ -41,14 +41,8 @@ client_scripts {
     'client/game.lua',
     'client/loops.lua',
     'client/admin.lua',
-    'client/addons/prompts.lua',
-    'client/addons/dataview.lua',
-    'client/addons/notify.lua',
-    'client/addons/population.lua',
-    'client/addons/doors.lua',
-    'client/addons/location_notify.lua',
-    'client/addons/js_data.js',
-    'client/addons/richpresence.lua',
+    'client/addons/*.lua',
+    'client/addons/*.js',
 }
 
 ui_page {

@@ -73,15 +73,15 @@ IC.Game.WeaponRecoils = {
 }
 
 IC.Game.PopDensMultipliers                   = {}            -- These are the multipliers for the population density of the game.
-IC.Game.PopDensMultipliers.ambientPeds       = 1.0           -- Multiplier for the amount of ambient animals in the game.
-IC.Game.PopDensMultipliers.scenarioPeds      = 1.0           -- Multiplier for the amount of ambient human peds in the game.
-IC.Game.PopDensMultipliers.vehicles          = 1.0           -- Multiplier for the amount of scenario animals in the game.
-IC.Game.PopDensMultipliers.parkedVehicles    = 1.0           -- Multiplier for the amount of scenario human peds in the game.
-IC.Game.PopDensMultipliers.randomVehicles    = 1.0           -- Multiplier for the amount of random vehicles in the game.
-IC.Game.PopDensMultipliers.ambientAnimals    = 1.0           -- Multiplier for the amount of ambient peds in the game.
-IC.Game.PopDensMultipliers.ambientHumans     = 1.0           -- Multiplier for the amount of ambient animals in the game.
-IC.Game.PopDensMultipliers.scenarioAnimals   = 1.0           -- Multiplier for the amount of parked vehicles in the game.
-IC.Game.PopDensMultipliers.scenarioHumans    = 1.0           -- Multiplier for the amount of random vehicles in the game.
+IC.Game.PopDensMultipliers.ambientPeds       = 1.0           -- 
+IC.Game.PopDensMultipliers.scenarioPeds      = 1.0           -- 
+IC.Game.PopDensMultipliers.vehicles          = 0.0           -- 
+IC.Game.PopDensMultipliers.parkedVehicles    = 1.0           -- 
+IC.Game.PopDensMultipliers.randomVehicles    = 1.0           -- 
+IC.Game.PopDensMultipliers.ambientAnimals    = 1.0           -- 
+IC.Game.PopDensMultipliers.ambientHumans     = 1.0           -- 
+IC.Game.PopDensMultipliers.scenarioAnimals   = 1.0           -- 
+IC.Game.PopDensMultipliers.scenarioHumans    = 1.0           -- 
 
 
 -----------------------------------------------------------------------------------------

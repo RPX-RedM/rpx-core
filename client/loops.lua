@@ -38,7 +38,7 @@ function GetCurrentTemperature()
     local player = PlayerPedId()
     local coords = GetEntityCoords(player)
     ShouldUseMetricTemperature()
-    temp = round(GetTemperatureAtCoords(coords.x, coords.y, coords.z), 1)
+    temp = math.floor(GetTemperatureAtCoords(coords.x, coords.y, coords.z), 1)
     if not Winter or inInterior then return temp end
     if Winter then
         if temp > 1 then
