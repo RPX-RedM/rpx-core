@@ -18,7 +18,7 @@ RPX.NotifyLeft = function(title, text, dict, icon, duration)
         LoadTexture(_dict)
         _icon = "tick"
     end
-    exports['rpx-core']:ShowAdvancedNotification(tostring(firsttext), tostring(secondtext), tostring(_dict), tostring(_icon), tonumber(duration))
+    exports['rpx-core']:DisplayLeftNotification(tostring(title), tostring(text), tostring(_dict), tostring(_icon), tonumber(duration))
 end
 
 RPX.NotifyRight = function(text, duration)
@@ -45,7 +45,7 @@ RPX.CommaValue = function(amount)
 end
 
 LoadTexture = function(dict)
-    if DoesStreamedTxdExist(dict) then 
+    if Citizen.InvokeNative(0xBA0163B277C2D2D0, dict) then 
         if not HasStreamedTextureDictLoaded(dict) then 
             RequestStreamedTextureDict(dict)
             while not HasStreamedTextureDictLoaded(dict) do 
