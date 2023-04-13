@@ -151,7 +151,7 @@ RegisterNetEvent("RPXAdmin:client:DeleteVehicleAdmin", function()
             SetEntityAsMissionEntity(closestvehicle, true, true)
             DeleteEntity(closestvehicle)
             DeleteVehicle(closestvehicle)
-            RPX.NotifyRight("Deleted vehicle.", 3000)
+            lib.notify({title = "Admin Actions", message = "Deleted vehicle.", type = "success"})
         end
     end
 end)

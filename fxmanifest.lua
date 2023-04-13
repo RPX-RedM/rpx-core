@@ -14,6 +14,7 @@ version '0.0.1'
 -- All other parts of this core/framework have been written entirely from scratch, with other frameworks used as inspiration.
 
 shared_scripts {
+    '@ox_lib/init.lua',
     'config.lua',
     'shared/debug.lua',
     'shared/jobs.lua',

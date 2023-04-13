@@ -10,27 +10,24 @@ RPX.DrawText = function (str, x, y, w, h, enableShadow, col1, col2, col3, a, cen
     DisplayText(str, x, y)
 end
 
-RPX.NotifyLeft = function(title, text, dict, icon, duration)
-    local _dict = dict
-    local _icon = icon
-    if not LoadTexture(_dict) then
-        _dict = "generic_textures"
-        LoadTexture(_dict)
-        _icon = "tick"
+RPX.NotifyLeft = function(title, text, texture_dict, texture_name, duration)
+    if texture_dict == "menu_textures" and texture_name == "menu_icon_alert" then
+        lib.notify({ title = title, description = text, type = "error" })
+    elseif texture_dict == "menu_textures" and texture_name == "menu_icon_tick" then
+        lib.notify({ title = title, description = text, type = "success" })
     end
-    exports['rpx-core']:DisplayLeftNotification(tostring(title), tostring(text), tostring(_dict), tostring(_icon), tonumber(duration))
 end
 
 RPX.NotifyRight = function(text, duration)
-    exports['rpx-core']:ShowSimpleRightText(tostring(text), tonumber(duration))
+    lib.notify({ title = text })
 end
 
 RPX.pNotifyLeft = function(text, timeout)
-    exports.pNotify:SendNotification({text = text, type = "error", layout = "centerLeft", timeout = timeout}) 
+    lib.notify({ title = text })
 end
 
 RPX.pNotifyRight = function(text, timeout)
-    exports.pNotify:SendNotification({text = text, type = "error", layout = "centerRight", timeout = timeout}) 
+    lib.notify({ title = text })
 end
 
 RPX.CommaValue = function(amount)

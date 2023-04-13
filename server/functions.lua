@@ -1,17 +1,21 @@
 RPX.NotifyLeft = function(source, title, text, texture_dict, texture_name, duration)
-    TriggerClientEvent("RPX:NotifyLeft", source, title, text, texture_dict, texture_name, duration)
+    if texture_dict == "menu_textures" and texture_name == "menu_icon_alert" then
+        lib.notify(source, {title = title, description = text, type = "error" })
+    elseif texture_dict == "menu_textures" and texture_name == "menu_icon_tick" then
+        lib.notify(source, {title = title, description = text, type = "success" })
+    end
 end
 
 RPX.NotifyRight = function(source, text, duration)
-    TriggerClientEvent("RPX:ShowSimpleRightText", source, text, duration)
+    lib.notify(source, { title = text })
 end
 
 RPX.pNotifyLeft = function(source, text, timeout)
-    TriggerClientEvent("pNotify:SendNotification", source, {text = text, type = "error", layout = "centerLeft", timeout = timeout}) 
+    lib.notify(source, { title = text })
 end
 
 RPX.pNotifyRight = function(source, text, timeout)
-    TriggerClientEvent("pNotify:SendNotification", source, {text = text, type = "error", layout = "centerRight", timeout = timeout}) 
+    lib.notify(source, { title = text })
 end
 
 RPX.CommaValue = function(amount)

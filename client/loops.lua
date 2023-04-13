@@ -26,9 +26,9 @@ CreateThread(function()
         Wait(300000)
         if LocalPlayer.state.isLoggedIn then
             if GetCurrentTemperature() < 4 then
-                RPX.pNotifyRight("You are feeling cold...", 3000)
+                lib.notify({ title = "Temperature", description = "You are feeling cold...", icon = "fas fa-temperature-arrow-up", type = "info" })
             elseif GetCurrentTemperature() > 26 then
-                RPX.pNotifyRight("You are feeling hot...", 3000)
+                lib.notify({ title = "Temperature", description = "You are feeling hot...", icon = "fas fa-temperature-high", type = "info" }})
             end
         end
     end
