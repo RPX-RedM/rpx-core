@@ -773,12 +773,6 @@ InternalShared.Items_T1 = {
         weight = 0.01,
         image = "atooth.png",
     },
-    ["condorf"] = {
-        label = "Condor feather",
-        description = "Animal Part",
-        weight = 0.001,
-        image = "featherlg.png",
-    },
     ["condorb"] = {
         label = "Condor beak",
         description = "Animal Part",
@@ -827,12 +821,6 @@ InternalShared.Items_T1 = {
     ["wsnakeskin"] =
     {
         label = "Watersnake pelt",
-        description = "Animal Part",
-        weight = 0.2,
-        image = "snakeskin.png",
-    },
-    ["boaskin"] = {
-        label = "Boa Snake pelt",
         description = "Animal Part",
         weight = 0.2,
         image = "snakeskin.png",
@@ -920,12 +908,6 @@ InternalShared.Items_T1 = {
         description = "Animal Part",
         weight = 0.001,
         image = "boobyft.png",
-    },
-    ["boobyf"] = {
-        label = "Red-footed booby beak",
-        description = "Animal Part",
-        weight = 0.01,
-        image = "smallbeak.png",
     },
     ["ravenc"] = {
         label = "Raven claws",

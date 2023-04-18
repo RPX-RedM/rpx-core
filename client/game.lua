@@ -123,22 +123,21 @@ if Internal_Config.Game.WeaponRecoilSystem then
             if IsPedShooting(ped) then
                 local _,wep = GetCurrentPedWeapon(ped)
                 if Internal_Config.Game.WeaponRecoils[wep] and Internal_Config.Game.WeaponRecoils[wep] ~= 0 then
-                    tv = 0
+                    TimeValue = 0
                     repeat
                         Wait(0)
-                        p = GetGameplayCamRelativePitch()
+                        GameplayCamPitch = GetGameplayCamRelativePitch()
                         if Internal_Config.Game.WeaponRecoils[wep] > 0.1 then
-                            SetGameplayCamRelativePitch(p+0.6, 1.2)
-                            tv = tv+0.6
+                            SetGameplayCamRelativePitch(GameplayCamPitch+0.6, 1.2)
+                            TimeValue = TimeValue+0.6
                         else
-                            SetGameplayCamRelativePitch(p+0.016, 0.333)
-                            tv = tv+0.1
+                            SetGameplayCamRelativePitch(GameplayCamPitch+0.016, 0.333)
+                            TimeValue = TimeValue+0.1
                         end
-                    until tv >= Internal_Config.Game.WeaponRecoils[wep]
+                    until TimeValue >= Internal_Config.Game.WeaponRecoils[wep]
                 end
             end
-    
-            Citizen.Wait(0)
+            Wait(0)
         end
     end)
 end

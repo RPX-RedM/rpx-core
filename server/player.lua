@@ -1,3 +1,7 @@
+
+--- Returns the player's object by their server id.
+---@param src string | number | unknown
+---@return Player | nil
 RPX.GetPlayer = function(src)
     local playerId = tonumber(src)
     if RPX.Players[playerId] then
@@ -6,6 +10,9 @@ RPX.GetPlayer = function(src)
     return nil
 end
 
+---Returns the player's object by their citizen id.
+---@param citizenId string
+---@return Player | nil
 RPX.GetPlayerByCitizenId = function(citizenId)
     for _,player in pairs(RPX.Players) do
         if player.citizenid == citizenId then
@@ -15,7 +22,11 @@ RPX.GetPlayerByCitizenId = function(citizenId)
     return nil
 end
 
+---Returns the player's characters.
+---@param src string | number
+---@return table
 RPX.Player.GetCharacters = function(src)
+    ---@cast src string
     local license = GetPlayerIdentifierByType(src, "license")
     local result = MySQL.Sync.fetchAll('SELECT * FROM characters WHERE license = ? ORDER BY slot', { license })
     if result then
@@ -28,7 +39,11 @@ RPX.Player.GetCharacters = function(src)
     return {}
 end
 
+---Helper function for the multicharacter to select a character.
+---@param src string | number
+---@param citizenid any
 RPX.Player.SelectCharacter = function(src, citizenid)
+    ---@cast src string
     local license = GetPlayerIdentifierByType(src, "license")
     local result = MySQL.prepare.await('SELECT * FROM characters WHERE license = ? AND citizenid = ?', { license, citizenid })
     if not result then
@@ -51,13 +66,20 @@ RPX.Player.SelectCharacter = function(src, citizenid)
         ("Player %s (%s) has logged into their character %s %s (%s)"):format(RPX.Players[src].name, src, dbdata.charinfo.firstname, dbdata.charinfo.lastname, dbdata.citizenid)
     )
     
+    ---@cast src number
+
     RPX.UpdateStateBags(src)
     TriggerClientEvent("CLIENT:MultiCharacter:CharacterSelected", src, dbdata, false)
     TriggerClientEvent("CLIENT:RPX:PlayerLoaded", src)
     TriggerEvent("SERVER:RPX:PlayerLoaded", src, RPX.Players[src])
 end
 
+---Create a new character.
+---@param src string | number
+---@param info table
+---@param slot number
 RPX.Player.CreateCharacter = function(src, info, slot)
+    ---@cast src string
     local license = GetPlayerIdentifierByType(src, "license")
 
     local NewCharacterData = {}
@@ -87,13 +109,19 @@ RPX.Player.CreateCharacter = function(src, info, slot)
 
     RPX.UpdateStateBags(src)
     PlayerInfo.position = Internal_Config.DefaultPosition
+
+    ---@cast src number
     TriggerClientEvent("CLIENT:MultiCharacter:CharacterSelected", src, PlayerInfo, true)
     
     TriggerClientEvent("rpx-appearance:client:newPlayer", src)    --TriggerClientEvent("CLIENT:RPX:PlayerLoaded", src)
     --TriggerEvent("SERVER:RPX:PlayerLoaded", src)
 end
 
+---Deletes a character from the database.
+---@param src string | number
+---@param citizenid string
 RPX.Player.DeleteCharacter = function(src, citizenid)
+    ---@cast src string
     local license = GetPlayerIdentifierByType(src, "license")
     MySQL.execute('DELETE FROM characters WHERE license = ? AND citizenid = ?', { license, citizenid })
     RPX.Logs.AddLog("framework", 
@@ -101,31 +129,8 @@ RPX.Player.DeleteCharacter = function(src, citizenid)
     )
 end
 
-RPX.UpdateStateBags = function(src)
-    if RPX.Players[src] then
-        local PlayerInfo = RPX.Players[src]
-        Player(src).state:set("isLoggedIn", true, true)
-        Player(src).state:set("name", ("%s %s"):format(PlayerInfo.charinfo.firstname, PlayerInfo.charinfo.lastname), true)
-        Player(src).state:set("slot", PlayerInfo.slot, true)
-        Player(src).state:set("firstname", PlayerInfo.charinfo.firstname, true)
-        Player(src).state:set("lastname", PlayerInfo.charinfo.lastname, true)
-        Player(src).state:set("citizenid", PlayerInfo.citizenid, true)
-        Player(src).state:set("gender", PlayerInfo.charinfo.gender, true)
-        Player(src).state:set("age", PlayerInfo.charinfo.age, true)
-        Player(src).state:set("height", PlayerInfo.charinfo.height, true)
-        Player(src).state:set("cash", PlayerInfo.money.cash, true)
-        Player(src).state:set("bank", PlayerInfo.money.bank, true)
-        Player(src).state:set("job", PlayerInfo.job.name, true)
-        Player(src).state:set("jobrank", PlayerInfo.job.rank, true)
-        Player(src).state:set("gang", PlayerInfo.gang, true)
-        Player(src).state:set("gangrank", PlayerInfo.gang.rank, true)
-        Player(src).state:set("position", PlayerInfo.position, true)
-        Player(src).state:set("skin", PlayerInfo.skin, true)
-        Player(src).state:set("clothes", PlayerInfo.clothes, true)
-        Player(src).state:set("metadata", PlayerInfo.metadata, true)
-    end
-end
-
+---Saves the player's data to the database.
+---@param src number
 RPX.Player.Save = function(src)
     if RPX.Players[src] then
         local PlayerInfo = RPX.Players[src]
@@ -144,6 +149,8 @@ RPX.Player.Save = function(src)
     end
 end
 
+---Logs the player out and saves their data.
+---@param src number
 RPX.Player.Logout = function(src)
     if RPX.Players[src] then
         RPX.Player.Save(src)
@@ -152,6 +159,8 @@ RPX.Player.Logout = function(src)
     end
 end
 
+---Generate a citizen id.
+---@return string
 RPX.Player.GenerateCitizenId = function()
     local Length = Internal_Config.CitizenIDLength
     local GoodCitizenIdFound = false
@@ -167,6 +176,8 @@ RPX.Player.GenerateCitizenId = function()
             CitizenId = CitizenId .. "" .. charset[math.random(1, #charset)]
         end
 
+        CitizenId = string.upper(CitizenId) -- Make sure it's uppercase. I could have changed the charset, but meh.
+
         local result = MySQL.prepare.await('SELECT COUNT(*) as count FROM characters WHERE citizenid = ?', { CitizenId })
         if result == 0 then
             GoodCitizenIdFound = true
@@ -175,7 +186,39 @@ RPX.Player.GenerateCitizenId = function()
     return CitizenId
 end
 
-CreatePlayer = function(src, dbdata)
+---@class Player
+---@field source number
+---@field license string
+---@field name string
+---@field citizenid string
+---@field permissiongroup string
+---@field slot number
+---@field charinfo table
+---@field skin table
+---@field clothes table
+---@field job table
+---@field gang table
+---@field money table
+---@field metadata table
+---@field position table
+---@field SetMoney function
+---@field GetMoney function
+---@field AddMoney function
+---@field RemoveMoney function
+---@field SetJob function
+---@field SetJobDuty function
+---@field SetGang function
+---@field SetSkinData function
+---@field SetClothesData function
+---@field SetMetaData function
+---@field Save function
+
+
+---Create the player object.
+---@param src any
+---@param dbdata any
+---@return Player
+CreatePlayer = function(src, dbdata) -- For some reason, this function doesn't seem to work if it's inside the RPX.Player table. I have no idea why.
     local self = {}
     self.source = src
     self.license = GetPlayerIdentifierByType(self.source, "license")
@@ -198,6 +241,7 @@ CreatePlayer = function(src, dbdata)
     self.job = dbdata.job or {}
     self.job.name = self.job.name or "unemployed" -- Default job
     self.job.rank = tonumber(self.job.rank) or 0 -- Default rank
+    self.job.duty = false
 
     self.gang = dbdata.gang or {}
     self.gang.name = self.gang.name or "none" -- Default gang
@@ -221,10 +265,10 @@ CreatePlayer = function(src, dbdata)
     self.SetMoney = function(type, amount)
         if self.money[type] then
             self.money[type] = amount
-            Player(self.source).state:set(type, self.money[type], true)
             if type == "cash" then
                 TriggerEvent("SERVER:RPX:OnCashChanged", self.source, self.money[type])
             end
+            RPX.UpdateStateBags(self.source)
         end
     end
 
@@ -232,10 +276,10 @@ CreatePlayer = function(src, dbdata)
         if self.money[type] then
             self.money[type] = self.money[type] + tonumber(amount)
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, false)
-            Player(self.source).state:set(type, self.money[type], true)
             if type == "cash" then
                 TriggerEvent("SERVER:RPX:OnCashChanged", self.source, self.money[type])
             end
+            RPX.UpdateStateBags(self.source)
         end
     end
 
@@ -243,38 +287,43 @@ CreatePlayer = function(src, dbdata)
         if self.money[type] then
             self.money[type] = self.money[type] - tonumber(amount)
             TriggerClientEvent("hud:client:OnMoneyChange", self.source, type, amount, true)
-            Player(self.source).state:set(type, self.money[type], true)
             if type == "cash" then
                 TriggerEvent("SERVER:RPX:OnCashChanged", self.source, self.money[type])
             end
+            RPX.UpdateStateBags(self.source)
         end
     end
 
     self.SetJob = function(job, rank)
         self.job.name = job
         self.job.rank = tonumber(rank)
-        Player(self.source).state:set("job", self.job.name, true)
-        Player(self.source).state:set("jobrank", self.job.rank, true)
+        RPX.UpdateStateBags(self.source) -- Not a huge fan of repeating this in every setter function. Not sure how to refactor yet.
+    end
+
+    self.SetJobDuty = function(jobDuty)
+        self.job.duty = jobDuty
+        RPX.UpdateStateBags(self.source)
     end
 
     self.SetGang = function(gang, rank)
         self.gang.name = gang
         self.gang.rank = tonumber(rank)
-        Player(self.source).state:set("gang", self.gang.name, true)
-        Player(self.source).state:set("gangrank", self.gang.rank, true)
+        RPX.UpdateStateBags(self.source)
     end
 
     self.SetMetaData = function(key, value)
         self.metadata[key] = value
-        Player(self.source).state:set("metadata", self.metadata, true)
+        RPX.UpdateStateBags(self.source)
     end
 
     self.SetSkinData = function(data) 
         self.skin = data
+        RPX.UpdateStateBags(self.source)
     end
 
     self.SetClothesData = function(data)
         self.clothes = data
+        RPX.UpdateStateBags(self.source)
     end
 
     self.Save = function()

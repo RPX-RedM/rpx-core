@@ -1,5 +1,3 @@
-RPX = exports['rpx-core']:GetObject()
-
 local ConnectedPlayers = {}
 
 TP = function(source, args, rawCommand)
@@ -9,13 +7,19 @@ TP = function(source, args, rawCommand)
         if args[1] ~= nil and args[2] == nil and args[3] == nil then
             if DoesEntityExist(GetPlayerPed(args[1])) then
                 local toCoords = GetEntityCoords(GetPlayerPed(args[1]))
-                SetEntityCoords(GetPlayerPed(source), toCoords)
+                SetEntityCoords(GetPlayerPed(source), toCoords --[[@as number]])
                 lib.notify(source, { title = "Teleported to "..GetPlayerName(args[1]).." ["..args[1].."]", type = "success" })
             else
                 lib.notify(source, { title = "Player offline?", type = "error" })
             end
         elseif args[1] ~= nil and args[2] ~= nil and args[3] ~= nil then
-            SetEntityCoords(GetPlayerPed(source), tonumber(args[1]), tonumber(args[2]), tonumber(args[3]))
+            SetEntityCoords(GetPlayerPed(source), 
+                tonumber(args[1]) --[[@as number]],
+                tonumber(args[2]) --[[@as number]],
+                tonumber(args[3]) --[[@as number]]
+            )
+            lib.notify(source, { title = ("Teleported to %2.f, %2.f, %2.f"):format(tonumber(args[1]), tonumber(args[2]), tonumber(args[3])), type = "success" })
+        else
             lib.notify(source, { title = "/tp [Player ID / X] [Y (optional)] [Z (optional)]", type = "error" })
         end
     else
@@ -35,8 +39,8 @@ RegisterCommand("spec", function(source, args, rawCommand)
             else
                 local Target = RPX.GetPlayer(args[1])
                 if Target then
-                    local PlayerPos = GetEntityCoords(GetPlayerPed(tonumber(args[1])))
-                    local Entity = NetworkGetNetworkIdFromEntity(GetPlayerPed(tonumber(args[1])))
+                    local PlayerPos = GetEntityCoords(GetPlayerPed(tonumber(args[1]) --[[@as number]]))
+                    local Entity = NetworkGetNetworkIdFromEntity(GetPlayerPed(tonumber(args[1]) --[[@as number]]))
                     if PlayerPos then
                         TriggerClientEvent("RPXAdmin:client:Spectate", source, PlayerPos, tonumber(args[1]))
                     end
@@ -60,8 +64,8 @@ RegisterNetEvent("RPXAdmin:server:RequestAdminSpec", function(source, targetplay
             else
                 local Target = RPX.GetPlayer(targetplayer)
                 if Target then
-                    local PlayerPos = GetEntityCoords(GetPlayerPed(tonumber(targetplayer)))
-                    local Entity = NetworkGetNetworkIdFromEntity(GetPlayerPed(tonumber(targetplayer)))
+                    local PlayerPos = GetEntityCoords(GetPlayerPed(tonumber(targetplayer) --[[@as number]]))
+                    local Entity = NetworkGetNetworkIdFromEntity(GetPlayerPed(tonumber(targetplayer)--[[@as number]]))
                     if PlayerPos then
                         TriggerClientEvent("RPXAdmin:client:Spectate", source, PlayerPos, tonumber(targetplayer))
                     end
@@ -93,7 +97,7 @@ RegisterCommand("bring", function(source, args, rawCommand)
         if args[1] ~= nil then
             if DoesEntityExist(GetPlayerPed(args[1])) then
                 local toCoords = GetEntityCoords(GetPlayerPed(source))
-                SetEntityCoords(GetPlayerPed(args[1]), toCoords)
+                SetEntityCoords(GetPlayerPed(args[1]), toCoords --[[@as number]])
                 lib.notify(source, { title = "Teleported "..GetPlayerName(args[1]).." ["..args[1].."] to you", type = "success" })
             else
                 lib.notify(source, { title = "Player offline?", type = "error" })
@@ -122,7 +126,7 @@ RegisterCommand("announce", function(source, args)
     if Player.permissiongroup == "admin" or Player.permissiongroup == "superadmin" then
         local msg = table.concat(args, " ")
         for _,target in pairs(GetPlayers()) do
-            lib.notify(target, { title = "SERVER ANNOUNCEMENT", description = msg, type = "info" })
+            lib.notify(tonumber(target) --[[@as number]], { title = "SERVER ANNOUNCEMENT", description = msg, type = "inform" })
         end
     else
         lib.notify(source, { title = "Insufficient permissions.", type = "error" })
@@ -136,9 +140,9 @@ RegisterCommand("balances", function(source, args)
         if args[1] then
             local Target = RPX.GetPlayer(args[1])
             if Target then
-                local title = ("Balances for %s (%s %s)"):format(GetPlayerName(tonumber(args[1])), Target.firstname, Target.lastname)
+                local title = ("Balances for %s (%s %s)"):format(GetPlayerName(tonumber(args[1]) --[[@as number]]), Target.charinfo.firstname, Target.charinfo.lastname)
                 local description = ("Cash: $%s, Bank: $%s"):format(Target.money.cash, Target.money.bank)
-                lib.notify(source, { title = title, description = description, type = "info" })
+                lib.notify(source, { title = title, description = description, type = "inform" })
             else
                 lib.notify(source, { title = "Player not logged in.", type = "error" })
             end
@@ -156,8 +160,8 @@ RegisterCommand("say", function(source, args)
             local id = args[1]
             table.remove(args, 1)
             local msg = table.concat(args, " ")
-            lib.notify(tonumber(id), { title = "STAFF MESSAGE", description = msg, type = "info" })
-            lib.notify(source, { title = "Sent message to "..GetPlayerName(id).." ("..Player.firstname.." "..Player.lastname..")", type = "success" })
+            lib.notify(tonumber(id) --[[@as number]], { title = "STAFF MESSAGE", description = msg, type = "inform" })
+            lib.notify(source, { title = "Sent message to "..GetPlayerName(id).." ("..Player.charinfo.firstname.." "..Player.charinfo.lastname..")", type = "success" })
         end
     else
         lib.notify(source, { title = "Insufficient permissions.", type = "error" })
@@ -181,8 +185,8 @@ RegisterCommand("setrb", function(source, args)
     if not Player then return end
     if Player.permissiongroup == "admin" or Player.permissiongroup == "superadmin" then
         if args[1] ~= nil and args[2] ~= nil then
-            if DoesEntityExist(GetPlayerPed(tonumber(args[1]))) then
-                SetPlayerRoutingBucket(tonumber(args[1]), tonumber(args[2]))
+            if DoesEntityExist(GetPlayerPed(tonumber(args[1]) --[[@as number]])) then
+                SetPlayerRoutingBucket(args[1], tonumber(args[2]) --[[@as number]])
             else
                 lib.notify(source, { title = "Player offline?", type = "error" })
             end
@@ -249,8 +253,8 @@ RegisterCommand("setgroup", function(source, args, rawCommand)
                     local group = args[2]
                     if group == "admin" or group == "superadmin" or group == "user" then
                         RPX.Players[tonumber(args[1])].permissiongroup = group
-                        RPX.Permissions.SetPermissionGroup(tonumber(args[1]), group)
-                        lib.notify(source, { title = "Set ".. GetPlayerName(tonumber(args[1])) .."'s group to <strong style=\"color:gold\">"..group.."</strong>!", type = "success" })
+                        RPX.Permissions.SetPermissionGroup(tonumber(args[1]) --[[@as number]], group)
+                        lib.notify(source, { title = "Set ".. GetPlayerName(tonumber(args[1]) --[[@as number]]) .."'s group to <strong style=\"color:gold\">"..group.."</strong>!", type = "success" })
                     end
                 else
                     lib.notify(source, {title = "Player not found or isn't logged in.", type = "error"})
@@ -277,7 +281,7 @@ RegisterCommand("setmoney", function(source, args, rawCommand)
                         Target.SetMoney("cash", tonumber(args[2]))
 
                         lib.notify(source, { title = "Set ".. Player.charinfo.fullname .."'s cash to <strong style=\"color:lime\">$".. RPX.CommaValue(string.format("%.2f", amount)).."</strong>!", type = "success" })
-                        lib.notify(tonumber(args[1]), { title = "Staff set your cash to <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", amount)).."</strong>!", type = "success" })
+                        lib.notify(tonumber(args[1]) --[[@as number]], { title = "Staff set your cash to <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", amount)).."</strong>!", type = "success" })
                     end
                 else
                     lib.notify(source, { title = "Player not found or isn't logged in.", type = "error" })
@@ -303,7 +307,7 @@ RegisterCommand("setjob", function(source, args, rawCommand)
 
                     Target.SetJob(job, rank)
 
-                    TriggerClientEvent("redem_roleplay:JobChange", tonumber(args[1]), job)
+                    TriggerClientEvent("redem_roleplay:JobChange", tonumber(args[1]) --[[@as number]], job)
                     lib.notify(source, { title = "Set "..Target.charinfo.fullname.."'s job to "..job.." (Rank "..rank..")", type = "success" })
                 else
                     lib.notify(source, { title = "Player not found or isn't logged in.", type = "error" })
@@ -329,7 +333,7 @@ RegisterCommand("setgang", function(source, args, rawCommand)
 
                     Target.SetGang(gang, rank)
 
-                    TriggerClientEvent("redem_roleplay:GangChange", tonumber(args[1]), gang)
+                    TriggerClientEvent("redem_roleplay:GangChange", tonumber(args[1]) --[[@as number]], gang)
                     lib.notify(source, { title = "Set "..Target.charinfo.fullname.."'s gang to "..gang.." (Rank "..rank..")", type = "success" })
                 else
                     lib.notify(source, { title = "Player not found or isn't logged in.", type = "error" })
@@ -356,7 +360,7 @@ RegisterCommand("addmoney", function(source, args, rawCommand)
                         Target.AddMoney("cash", tonumber(args[2]))
 
                         lib.notify(source, { title = "Added <strong style=\"color:lime\">$".. RPX.CommaValue(string.format("%.2f", args[2])).."</strong> to ".. Target.charinfo.fullname .."!", type = "success" })
-                        lib.notify(tonumber(args[1]), { title = "Staff gave you <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong>!", type = "success" })
+                        lib.notify(tonumber(args[1]) --[[@as number]], { title = "Staff gave you <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong>!", type = "success" })
                     end
                 else
                     lib.notify(source, { title = "Player not found or isn't logged in.", type = "error" })
@@ -384,7 +388,7 @@ RegisterCommand("addbankmoney", function(source, args, rawCommand)
                         Target.AddMoney("bank", tonumber(args[2]))
 
                         lib.notify(source, {title = "Added <strong style=\"color:lime\">$".. RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank to ".. Target.charinfo.fullname .."!", type = "success" })
-                        lib.notify(tonumber(args[1]), {title = "Staff gave you <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank money!", type = "success" })
+                        lib.notify(tonumber(args[1]) --[[@as number]], {title = "Staff gave you <strong style=\"color:lime\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank money!", type = "success" })
                     end
                 else
                     lib.notify(source, { title = "Player not found or isn't logged in.", type = "error" })
@@ -412,7 +416,7 @@ RegisterCommand("removemoney", function(source, args, rawCommand)
                         Target.RemoveMoney(tonumber(args[2]))
 
                         lib.notify(source, { title = "Removed <strong style=\"color:red\">$".. RPX.CommaValue(string.format("%.2f", args[2])).."</strong> cash from ".. Target.charinfo.fullname .."!", type = "success" })
-                        lib.notify(tonumber(args[1]), { title = "Staff removed <strong style=\"color:red\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong> cash from you!", type = "error" })
+                        lib.notify(tonumber(args[1]) --[[@as number]], { title = "Staff removed <strong style=\"color:red\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong> cash from you!", type = "error" })
                     end
                 else
                     lib.notify(source, { title = "Player not found or isn't logged in.", type = "error" })
@@ -436,10 +440,10 @@ RegisterCommand("removebankmoney", function(source, args, rawCommand)
                 if Target then
                     local amount = tonumber(args[2])
                     if amount > 0 then
-                        Target.RemoveBankMoney(tonumber(args[2]))
+                        Target.RemoveMoney('bank', tonumber(args[2]))
                         
                         lib.notify(source, { title = "Removed <strong style=\"color:red\">$".. RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank money from ".. Target.charinfo.fullname .."!", type = "success" })
-                        lib.notify(tonumber(args[1]), { title = "Staff removed <strong style=\"color:red\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank money from you!", type = "error" })
+                        lib.notify(tonumber(args[1]) --[[@as number]], { title = "Staff removed <strong style=\"color:red\">$"..RPX.CommaValue(string.format("%.2f", args[2])).."</strong> bank money from you!", type = "error" })
                     end
                 else
                     lib.notify(source, { title = "Player not found or isn't logged in.", type = "error" })

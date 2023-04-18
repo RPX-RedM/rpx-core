@@ -13,35 +13,35 @@ InternalShared.Jobs = {
                 Label = "Deputy",
                 Salary = 10,
                 Permissions = {
-                    "police:cuff", "police:hogtie", "police:jail", "police:mdt", "police:lockers"
+                    "sheriff:general", "sheriff:mdt", "sheriff:lockers"
                 }
             },
             [2] = {
                 Label = "Sergeant",
                 Salary = 15,
                 Permissions = {
-                    "police:cuff", "police:hogtie", "police:jail", "police:mdt", "police:lockers"
+                    "sheriff:general", "sheriff:mdt", "sheriff:lockers"
                 }
             },
             [3] = {
                 Label = "Lieutenant",
                 Salary = 20,
                 Permissions = {
-                    "police:cuff", "police:hogtie", "police:jail", "police:mdt", "police:lockers"
+                    "sheriff:general", "sheriff:mdt", "sheriff:lockers"
                 }
             },
             [4] = {
                 Label = "Captain",
                 Salary = 25,
                 Permissions = {
-                    "police:cuff", "police:hogtie", "police:jail", "police:mdt", "police:lockers", "generic:bossmenu"
+                    "sheriff:general", "sheriff:mdt", "sheriff:lockers", "generic:bossmenu"
                 }
             },
             [5] = {
                 Label = "Sheriff",
                 Salary = 30,
                 Permissions = {
-                    "police:cuff", "police:hogtie", "police:jail", "police:mdt", "police:lockers", "generic:bossmenu"
+                    "sheriff:general", "sheriff:mdt", "sheriff:lockers", "generic:bossmenu"
                 }
             }
         }
@@ -50,6 +50,11 @@ InternalShared.Jobs = {
 
 GlobalState.Shared_Jobs = InternalShared.Jobs
 
+---Export to check if a player has a job related permission. This prevents having to check for a list of each type of job in each resource.
+---@param jobName string
+---@param rank number
+---@param permission string
+---@return boolean
 exports('HasJobPermission', function(jobName, rank, permission)
     if InternalShared.Jobs[jobName] and InternalShared.Jobs[jobName].Ranks[rank] and InternalShared.Jobs[jobName].Ranks[rank].Permissions then
         for _, perm in pairs(InternalShared.Jobs[jobName].Ranks[rank].Permissions) do

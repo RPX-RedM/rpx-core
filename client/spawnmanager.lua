@@ -28,21 +28,20 @@ Citizen.CreateThread(function()
                     -- release the player model
                     SetModelAsNoLongerNeeded(InitialPedModel)
                     
-                    -- RDR3 player model bits
-                    if N_0x283978a15512b2fe then
-                        N_0x283978a15512b2fe(PlayerPedId(), true)
-                    end
+
+                    Citizen.InvokeNative(0x283978A15512B2FE, PlayerPedId(), true) -- _SET_RANDOM_OUTFIT_VARIATION
+
 
                     -- preload collisions for the spawnpoint
-                    RequestCollisionAtCoord(InitialPedSpawn)
+                    RequestCollisionAtCoord(InitialPedSpawn --[[@as number]])
 
                     -- spawn the player
                     local ped = PlayerPedId()
 
                     -- V requires setting coords as well
-                    SetEntityCoordsNoOffset(ped, InitialPedSpawn, false, false, false, true)
+                    SetEntityCoordsNoOffset(ped, InitialPedSpawn.x, InitialPedSpawn.y, InitialPedSpawn.z, false, false, false)
 
-                    NetworkResurrectLocalPlayer(InitialPedSpawn, 0.0, true, true, false)
+                    NetworkResurrectLocalPlayer(InitialPedSpawn.x, InitialPedSpawn.y, InitialPedSpawn.z, 0.0, 1, true, false)
 
                     -- gamelogic-style cleanup stuff
                     ClearPedTasksImmediately(ped)
