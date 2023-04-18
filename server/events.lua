@@ -115,3 +115,14 @@ RegisterNetEvent('RPX:SetStress', function(amount)
         end
     end
 end)
+
+-- txAdmin Server Shutting Down Event
+-- This event is triggered when txAdmin is about to restart or stop the server.
+AddEventHandler('txAdmin:events:serverShuttingDown', function(eventData)
+    CreateThread(function()
+        for _, id in pairs(GetPlayers()) do
+            -- We want to kick all players from the server _before_ it restarts, ensuring that all players get saved.
+            DropPlayer(id, "Server is restarting. Please rejoin in a few minutes.")
+        end
+    end)
+end)
