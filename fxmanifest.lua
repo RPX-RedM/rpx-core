@@ -9,7 +9,7 @@ version '0.0.1'
 -- Small parts of this core/framework are based on the following other resources:
 --     - VORPCore @ https://github.com/VORPCORE/vorp-core-lua
 --     - QBR-Core @ https://github.com/qbcore-redm-framework/qbr-core
--- Credits were given where due.
+-- Credits is given where due.
 
 -- All other parts of this core/framework have been written entirely from scratch, with other frameworks used as inspiration.
 
