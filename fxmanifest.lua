@@ -29,6 +29,7 @@ server_scripts {
     'server/player.lua',
     'server/events.lua',
     'server/functions.lua',
+    'server/loops.lua',
     'server/addons/*.lua',
 }
 

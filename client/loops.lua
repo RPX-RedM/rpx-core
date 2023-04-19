@@ -1,3 +1,14 @@
+-- Register player coordinates with the server.
+CreateThread(function()
+    while true do
+        Wait(2500)
+        if LocalPlayer.state.isLoggedIn then
+            local PlayerPed = PlayerPedId()
+            TriggerServerEvent("SERVER:RPX:RegisterPlayerCoords", GetEntityCoords(PlayerPed), GetEntityHeading(PlayerPed))
+        end
+    end
+end)
+
 CreateThread(function()
     while true do
         Wait(0)

@@ -152,7 +152,7 @@ exports("showDeathNotif", function(title, _audioRef, _audioName, duration)
     struct1:SetInt16(8 * 2, 4)
     struct2:SetInt64(8 * 1, bigInt(title))
     local zz = Citizen.InvokeNative(0x815C4065AE6E6071, struct1:Buffer(), struct2:Buffer(), 1)
-    Wait(tonumber(Duration))
+    Wait(tonumber(Duration) --[[@as number]])
     Citizen.InvokeNative(0x00A15B94CBA4F76F, zz)
 end)
 

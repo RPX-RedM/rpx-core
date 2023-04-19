@@ -22,6 +22,9 @@ exports('GetWeapons', function()
     return InternalShared.Weapons
 end)
 
+--- Gets the peds in the game pool, allowing an ignore list.
+---@param ignoreList table A list of peds to ignore.
+---@return table peds A list of peds.
 exports('GetPeds', function(ignoreList)
     local pedPool = GetGamePool('CPed')
     local ignoreList = ignoreList or {}
@@ -40,6 +43,11 @@ exports('GetPeds', function(ignoreList)
     return peds
 end)
 
+--- Get the closest ped to the player.
+---@param coords vector3 | table The coords to check from.
+---@param ignoreList? table A list of peds to ignore.
+---@return integer closestPed The closest ped.
+---@return number closestDistance The distance of the closest ped.
 exports('GetClosestPed', function(coords, ignoreList)
     local ped = PlayerPedId()
     if coords then
@@ -63,6 +71,10 @@ exports('GetClosestPed', function(coords, ignoreList)
     return closestPed, closestDistance
 end)
 
+--- Get the closest player.
+---@param coords vector3 | table The coords to check from.
+---@return number closestPlayer The closest player. 
+---@return number closestDistance The distance of the closest player.
 exports('GetClosestPlayer', function(coords)
     local ped = PlayerPedId()
     if coords then
@@ -87,6 +99,9 @@ exports('GetClosestPlayer', function(coords)
     return closestPlayer, closestDistance
 end)
 
+--- Get players from coords
+---@param coords vector3 | table The coords to check from.
+---@param distance number The distance to check from.
 exports('GetPlayersFromCoords', function(coords, distance)
     local players = GetActivePlayers()
     local ped = PlayerPedId()
@@ -108,6 +123,10 @@ exports('GetPlayersFromCoords', function(coords, distance)
     return closePlayers
 end)
 
+--- Get closest vehicle
+---@param coords vector3 | table The coords to check from.
+---@return integer closestVehicle The closest vehicle.
+---@return number closestDistance The distance of the closest vehicle.
 exports('GetClosestVehicle', function(coords)
     local ped = PlayerPedId()
     local vehicles = GetGamePool('CVehicle')
@@ -130,6 +149,10 @@ exports('GetClosestVehicle', function(coords)
     return closestVehicle, closestDistance
 end)
 
+--- Get closest object
+---@param coords vector3 | table The coords to check from.
+---@return integer closestObject The closest object.
+---@return number closestDistance The distance of the closest object.
 exports('GetClosestObject', function(coords)
     local ped = PlayerPedId()
     local objects = GetGamePool('CObject')
@@ -151,21 +174,11 @@ exports('GetClosestObject', function(coords)
     return closestObject, closestDistance
 end)
 
-exports('AttachProp', function(ped, model, boneId, x, y, z, xR, yR, zR, Vertex)
-    local modelHash = GetHashKey(model)
-    local bone = GetPedBoneIndex(ped, boneId)
-    RequestModel(modelHash)
-    while not HasModelLoaded(modelHash) do
-        Wait(0)
-    end
-    local prop = CreateObject(modelHash, 1.0, 1.0, 1.0, 1, 1, 0)
-    AttachEntityToEntity(prop, ped, bone, x, y, z, xR, yR, zR, 1, 1, 0, 1, not Vertex and 2 or 0, 1)
-    SetModelAsNoLongerNeeded(modelHash)
-    return prop
-end)
-
--- Vehicle
-
+--- Spawn a vehicle
+---@param model string The model of the vehicle.
+---@param cb? function The callback function.
+---@param coords vector3 | table The coords to spawn the vehicle at.
+---@param isnetworked boolean Whether the vehicle should be networked.
 exports('SpawnVehicle', function(model, cb, coords, isnetworked)
     local hash = GetHashKey(model)
     local ped = PlayerPedId()
@@ -188,41 +201,11 @@ exports('SpawnVehicle', function(model, cb, coords, isnetworked)
     end
 end)
 
-function Notify(id, text, duration, subtext, dict, icon, color)
-    local display = tostring(text) or 'Placeholder'
-	local subdisplay = tostring(subtext) or 'Placeholder'
-	local length = tonumber(duration) or 4000
-	local dictionary = tostring(dict) or 'generic_textures'
-	local image = tostring(icon) or 'tick'
-	local colour = tostring(color) or 'COLOR_WHITE'
-
-    local notifications = {
-        [1] = function() return exports['rpx-core']:ShowTooltip(display, length) end,
-        [2] = function() return exports['rpx-core']:DisplayRightText(display, length) end,
-        [3] = function() return exports['rpx-core']:ShowObjective(display, length) end,
-        [4] = function() return exports['rpx-core']:ShowBasicTopNotification(display, length) end,
-        [5] = function() return exports['rpx-core']:ShowSimpleCenterText(display, length) end,
-        [6] = function() return exports['rpx-core']:ShowLocationNotification(display, subdisplay, length) end,
-        [7] = function() return exports['rpx-core']:ShowTopNotification(display, subdisplay, length) end,
-        [8] = function() if not LoadTexture(dictionary) then LoadTexture('generic_textures') end
-            return exports['rpx-core']:ShowAdvancedLeftNotification(display, subdisplay, dictionary, image, length) end,
-        [9] = function() if not LoadTexture(dictionary) then LoadTexture('generic_textures') end
-            return exports['rpx-core']:ShowAdvancedRightNotification(display, dictionary, image, colour, length) end
-    }
-
-    if not notifications[id] then
-        print('Invalid Notify ID')
-        return nil
-    else
-        return notifications[id]()
-    end
-end
-exports('Notify', Notify)
-
-RegisterNetEvent("RPX:Notify", function(id, text, duration, subtext, dict, icon, color)
-    Notify(id, text, duration, subtext, dict, icon, color)
-end)
-
-RegisterNetEvent("RPX:NotifyType1", function(text, duration)
-    Notify(1, text, duration)
+--- Trigger a registered server callback. Access only through the export.
+---@param name string
+---@param cb function
+---@param ... any
+exports('TriggerCallback', function (name, cb, ...)
+    RPX.ServerCallbacks[name] = cb
+    TriggerServerEvent('SERVER:TriggerCallback', name, ...)
 end)

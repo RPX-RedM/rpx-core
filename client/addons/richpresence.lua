@@ -1,10 +1,9 @@
 Citizen.CreateThread(function()
 	while true do
-		SetDiscordAppId(1092996273721835641)
-		SetDiscordRichPresenceAsset("loading")
-        SetDiscordRichPresenceAssetText("RPX Framework")
-        --SetDiscordRichPresenceAction(0, "Join Discord", "https://discord.gg/T3PUdmCBFe")
-        
+		SetDiscordAppId('1092996273721835641')
+		SetDiscordRichPresenceAsset('loading')
+        SetDiscordRichPresenceAssetText('RPX Framework')
+
         while not GlobalState.PlayerCount do
             Wait(500)
         end

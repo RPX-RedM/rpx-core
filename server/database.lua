@@ -65,7 +65,7 @@ RPX.Database.Tables = {
     },
 }
 
-RPX.Database.Init = function()
+CreateThread(function()
     MySQL.ready(function()
         for _,table in pairs(RPX.Database.Tables) do
             MySQL.Async.execute(table.query, {}, function()
@@ -73,4 +73,4 @@ RPX.Database.Init = function()
             end)
         end
     end)
-end
+end)

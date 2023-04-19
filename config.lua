@@ -17,6 +17,7 @@ IC.Player.UpdateRate    				= 5 			-- Minutes
 IC.Player.StatusRate    				= 5000 			-- Seconds
 IC.Player.HungerRate    				= 4.2 			-- Rate at which hunger increases.
 IC.Player.ThirstRate    				= 3.8 			-- Rate at which thirst increases.
+IC.Player.CanLogout						= true			-- Set to false to disable the ability to logout.
 
 IC.Game = {}                                            -- These are game modifications to improve the RP/multiplayer experience.
 IC.Game.EnablePVP                       = true          -- Whether or not to enable PVP/friendly fire.
@@ -37,14 +38,9 @@ IC.Game.WeaponRecoils = {
 	[1701864918] = 0.7,-- weapon_pistol_semiauto
 	[2239809086] = 0.7,-- weapon_pistol_mauser
 	[1905553950] = 0.7,-- weapon_repeater_evans
-	-- [2077870112] = 0.7,-- weapon_repeater_carbine_sadie
 	[2511488402] = 0.7,-- weapon_repeater_henry
 	[2823250668] = 0.7,-- weapon_repeater_winchester
-	-- [3195419004] = 0.7,-- weapon_repeater_winchester_john
 	[4111948705] = 0.7,-- weapon_repeater_carbine
-	-- [13903789] = 0.7,-- weapon_revolver_doubleaction_micah_dualwield
-	-- [36703333] = 0.7,-- weapon_revolver_doubleaction_micah
-	-- [38266755] = 0.7,--weapon_revolver_schofield_calloway
 	[127400949] = 0.7,-- weapon_revolver_doubleaction
 	[379542007] = 0.7,-- weapon_revolver_cattleman
 	[383145463] = 0.7,-- weapon_revolver_cattleman_mexican
@@ -62,14 +58,6 @@ IC.Game.WeaponRecoils = {
 	[1845102363] = 0.7,-- weapon_shotgun_doublebarrel
 	[1402226560] = 0.7,-- weapon_sniperrifle_carcano
 	[3788682007] = 0.7,-- weapon_sniperrifle_rollingblock
-
-    -------------------------------------  Weapons from game version 1207.80 till 1311.12 ---------------------------------
-    -- {`weapon_rifle_elephant`,`group_rifle`,},
-    -- {`weapon_revolver_navy`,`group_revolver`,},
-
-    -------------------------------------  Weapons from game version 1311.12 till 1355.18 ---------------------------------
-   	--- {`weapon_revolver_navy_crossover`,`group_revolver`,},
-
 }
 
 IC.Game.PopDensMultipliers                   = {}            -- These are the multipliers for the population density of the game.
@@ -93,3 +81,5 @@ GlobalState.DensityMultipliers 				 = IC.Game.PopDensMultipliers  -- Push the po
 GlobalState.DeploymentType	 				 = IC.DeploymentType -- Push the framework's deployment type to the global state. Don't touch this!
 
 Internal_Config = IC
+
+GlobalState.RPXConfig = Internal_Config
