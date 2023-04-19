@@ -53,7 +53,13 @@ ui_page {
 
 files {
     'html/ui.html',
-    -- Todo: Add more files here
 }
 
 lua54 'yes'
+
+dependencies {
+	'/server:6116',
+	'/onesync',
+	'oxmysql',
+	'ox_lib',
+}
