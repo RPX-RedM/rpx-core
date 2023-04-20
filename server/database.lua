@@ -52,15 +52,15 @@ RPX.Database.Tables = {
         ]],
     },
     {
-        name = "stashitems",
+        name = "inventory_stashes",
         query = [[
-            CREATE TABLE IF NOT EXISTS `stashitems` (
-                `id` INT(11) NOT NULL AUTO_INCREMENT,
-                `stash` VARCHAR(255) NOT NULL COLLATE 'latin1_swedish_ci',
-                `items` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
-                PRIMARY KEY (`stash`) USING BTREE,
-                INDEX `id` (`id`) USING BTREE
-            ) ENGINE=InnoDB AUTO_INCREMENT=1;
+            CREATE TABLE IF NOT EXISTS `inventory_stashes` (
+                `owner` varchar(60) DEFAULT NULL,
+                `name` varchar(100) NOT NULL,
+                `data` longtext DEFAULT NULL,
+                `lastupdated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                UNIQUE KEY `owner` (`owner`,`name`)
+            );
         ]],
     },
 }
