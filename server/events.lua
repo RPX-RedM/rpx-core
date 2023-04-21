@@ -129,9 +129,9 @@ end)
 
 -- Kick players who don't have a license identifier.
 RegisterServerEvent('playerConnecting', function(name, setKickReason)
-	local src = source --[[@as string]]
-	if not GetPlayerIdentifierByType(src, "license") then
-		setKickReason("Could not find 'license' identifier, please relaunch RedM.")
-		CancelEvent()
-	end
+    local src = source --[[@as string]]
+    if not GetPlayerIdentifierByType(src, "license") then
+        setKickReason("Could not find 'license' identifier, please relaunch RedM.")
+        CancelEvent()
+    end
 end)

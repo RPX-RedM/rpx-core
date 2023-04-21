@@ -60,8 +60,8 @@ files {
 lua54 'yes'
 
 dependencies {
-	'/server:6116',
-	'/onesync',
-	'oxmysql',
-	'ox_lib',
+    '/server:6116',
+    '/onesync',
+    'oxmysql',
+    'ox_lib',
 }

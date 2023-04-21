@@ -1363,157 +1363,157 @@ InternalShared.Items_T1 = {
         image = "LambChop.png",
     },
 
-	["a_c_fishbluegil_01_ms"] = {
+    ["a_c_fishbluegil_01_ms"] = {
         label = "Bluegill",
         description = "The bluegill is a species of freshwater fish",
         weight = 0.1,
         image = "a_c_fishbluegil_01_ms.png",
     },
-	["a_c_fishbluegil_01_sm"] = {
+    ["a_c_fishbluegil_01_sm"] = {
         label = "Small Bluegill",
         description = "The bluegill is a species of freshwater fish",
         weight = 0.1,
         image = "a_c_fishbluegil_01_sm.png",
     },
-	["a_c_fishbullheadcat_01_ms"] = {
+    ["a_c_fishbullheadcat_01_ms"] = {
         label = "Bullhead Catfish",
         description = "Ameiurus is a genus of catfishes in the family Ictaluridae.",
         weight = 0.1,
         image = "a_c_fishbullheadcat_01_ms.png",
     },
-	["a_c_fishbullheadcat_01_sm"] = {
+    ["a_c_fishbullheadcat_01_sm"] = {
         label = "Small Bullhead Catfish",
         description = "Ameiurus is a genus of catfishes in the family Ictaluridae.",
         weight = 0.1,
         image = "a_c_fishbullheadcat_01_sm.png",
     },
-	["a_c_fishchainpickerel_01_ms"] = {
+    ["a_c_fishchainpickerel_01_ms"] = {
         label = "Chain pickerel",
         description = "The chain pickerel is a species of freshwater fish in the pike family of order Esociformes.",
         weight = 0.1,
         image = "a_c_fishchainpickerel_01_ms.png",
     },
-	["a_c_fishchainpickerel_01_sm"] = {
+    ["a_c_fishchainpickerel_01_sm"] = {
         label = "Small Chain pickerel",
         description = "The chain pickerel is a species of freshwater fish in the pike family of order Esociformes.",
         weight = 0.1,
         image = "a_c_fishchainpickerel_01_sm.png",
     },
-	["a_c_fishchannelcatfish_01_lg"] = {
+    ["a_c_fishchannelcatfish_01_lg"] = {
         label = "Lengendary Catfish",
         description = "The channel catfish is North America's most numerous catfish species.",
         weight = 0.1,
         image = "a_c_fishchannelcatfish_01_lg.png",
     },
-	["a_c_fishchannelcatfish_01_xl"] = {
+    ["a_c_fishchannelcatfish_01_xl"] = {
         label = "Catfish",
         description = "The channel catfish is North America's most numerous catfish species.",
         weight = 0.1,
         image = "a_c_fishchannelcatfish_01_xl.png",
     },
-	["a_c_fishlakesturgeon_01_lg"] = {
+    ["a_c_fishlakesturgeon_01_lg"] = {
         label = "Legendary Lake Sturgeon",
         description = "The lake sturgeon, also known as the rock sturgeon, is a North American temperate freshwater fish",
         weight = 0.1,
         image = "a_c_fishlakesturgeon_01_lg.png",
     },
-	["a_c_fishlargemouthbass_01_lg"] = {
+    ["a_c_fishlargemouthbass_01_lg"] = {
         label = "Largemouth bass",
         description = "The largemouth bass is a carnivorous freshwater gamefish in the Centrarchidae family",
         weight = 0.1,
         image = "a_c_fishlargemouthbass_01_lg.png",
     },
-	["a_c_fishlargemouthbass_01_ms"] = {
+    ["a_c_fishlargemouthbass_01_ms"] = {
         label = "Small Largemouth Bass",
         description = "The largemouth bass is a carnivorous freshwater gamefish in the Centrarchidae family",
         weight = 0.1,
         image = "a_c_fishlargemouthbass_01_ms.png",
     },
-	["a_c_fishlongnosegar_01_lg"] = {
+    ["a_c_fishlongnosegar_01_lg"] = {
         label = "Legendary Longnose Gar",
         description = "The longnose gar, also known as longnose garpike or billy gar,",
         weight = 0.1,
         image = "a_c_fishlongnosegar_01_lg.png",
     },
-	["a_c_fishmuskie_01_lg"] = {
+    ["a_c_fishmuskie_01_lg"] = {
         label = "Legendary Muskie",
         description = "The muskellunge, often shortened to muskie, musky or lunge,",
         weight = 0.1,
         image = "a_c_fishmuskie_01_lg.png",
     },
-	["a_c_fishperch_01_ms"] = {
+    ["a_c_fishperch_01_ms"] = {
         label = "Perch",
         description = "Perch is a common name for fish of the genus Perca,",
         weight = 0.1,
         image = "a_c_fishperch_01_ms.png",
     },
-	["a_c_fishperch_01_sm"] = {
+    ["a_c_fishperch_01_sm"] = {
         label = "Small Perch",
         description = "Perch is a common name for fish of the genus Perca,",
         weight = 0.1,
         image = "a_c_fishperch_01_sm.png",
     },
-	["a_c_fishrainbowtrout_01_lg"] = {
+    ["a_c_fishrainbowtrout_01_lg"] = {
         label = "Legendary Rainbow Trout",
         description = "The rainbow trout is a trout and species of salmonid native to cold-water tributaries of the Pacific Ocean",
         weight = 0.1,
         image = "a_c_fishrainbowtrout_01_lg.png",
     },
-	["a_c_fishrainbowtrout_01_ms"] = {
+    ["a_c_fishrainbowtrout_01_ms"] = {
         label = "Rainbow Trout",
         description = "The rainbow trout is a trout and species of salmonid native to cold-water tributaries of the Pacific Ocean",
         weight = 0.1,
         image = "a_c_fishrainbowtrout_01_ms.png",
     },
-	["a_c_fishredfinpickerel_01_ms"] = {
+    ["a_c_fishredfinpickerel_01_ms"] = {
         label = "Redfin Pickerel",
         description = "The redfin pickerel is a subspecies of freshwater fish belonging to the pike family",
         weight = 0.1,
         image = "a_c_fishredfinpickerel_01_ms.png",
     },
-	["a_c_fishredfinpickerel_01_sm"] = {
+    ["a_c_fishredfinpickerel_01_sm"] = {
         label = "Small Redfin Pickerel",
         description = "The redfin pickerel is a subspecies of freshwater fish belonging to the pike family",
         weight = 0.1,
         image = "a_c_fishredfinpickerel_01_sm.png",
     },
-	["a_c_fishrockbass_01_ms"] = {
+    ["a_c_fishrockbass_01_ms"] = {
         label = "Rock bass",
         description = "The rock bass, also known as the rock perch, goggle-eye, red eye",
         weight = 0.1,
         image = "a_c_fishrockbass_01_ms.png",
     },
-	["a_c_fishrockbass_01_sm"] = {
+    ["a_c_fishrockbass_01_sm"] = {
         label = "Small Rock Bass",
         description = "The rock bass, also known as the rock perch, goggle-eye, red eye",
         weight = 0.1,
         image = "a_c_fishrockbass_01_sm.png",
     },
-	["a_c_fishsalmonsockeye_01_lg"] = {
+    ["a_c_fishsalmonsockeye_01_lg"] = {
         label = "Legendary Sockeye Salmon",
         description = "The sockeye salmon, also called red salmon, kokanee salmon,",
         weight = 0.1,
         image = "a_c_fishsalmonsockeye_01_lg.png",
     },
-	["a_c_fishsalmonsockeye_01_ml"] = {
+    ["a_c_fishsalmonsockeye_01_ml"] = {
         label = "Sockeye salmon",
         description = "The sockeye salmon, also called red salmon, kokanee salmon,",
         weight = 0.1,
         image = "a_c_fishsalmonsockeye_01_ml.png",
     },
-	["a_c_fishsalmonsockeye_01_ms"] = {
+    ["a_c_fishsalmonsockeye_01_ms"] = {
         label = "Small Sockeye Salmon",
         description = "The sockeye salmon, also called red salmon, kokanee salmon,",
         weight = 0.1,
         image = "a_c_fishsalmonsockeye_01_ms.png",
     },
-	["a_c_fishsmallmouthbass_01_lg"] = {
+    ["a_c_fishsmallmouthbass_01_lg"] = {
         label = "Smallmouth bass",
         description = "The smallmouth bass is a species of freshwater fish in the sunfish family",
         weight = 0.1,
         image = "a_c_fishsmallmouthbass_01_lg.png",
     },
-	["a_c_fishsmallmouthbass_01_ms"] = {
+    ["a_c_fishsmallmouthbass_01_ms"] = {
         label = "Small Smallmouth Bass",
         description = "The smallmouth bass is a species of freshwater fish in the sunfish family",
         weight = 0.1,

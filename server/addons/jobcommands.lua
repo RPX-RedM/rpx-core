@@ -1,13 +1,13 @@
 local selfExports = exports[GetCurrentResourceName()]
 
 RegisterCommand("duty", function(source, args)
-	local char = RPX.GetPlayer(source)
+    local char = RPX.GetPlayer(source)
     if not char then return end
-	if selfExports:HasJobPermission(char.job.name, char.job.rank, "sheriff:general")
-	or selfExports:HasJobPermission(char.job.name, char.job.rank, "doctor:general" ) then
-		char.SetJobDuty(not char.job.duty)
-		lib.notify(source, {title = "You are now "..(not char.job.duty and "on" or "off").." duty.", type = "success"})
-	end
+    if selfExports:HasJobPermission(char.job.name, char.job.rank, "sheriff:general")
+    or selfExports:HasJobPermission(char.job.name, char.job.rank, "doctor:general" ) then
+        char.SetJobDuty(not char.job.duty)
+        lib.notify(source, {title = "You are now "..(not char.job.duty and "on" or "off").." duty.", type = "success"})
+    end
 end)
 
 RegisterCommand("quitjob", function(source, args)

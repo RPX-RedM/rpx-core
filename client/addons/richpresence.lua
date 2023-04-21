@@ -1,7 +1,7 @@
 Citizen.CreateThread(function()
-	while true do
-		SetDiscordAppId('1092996273721835641')
-		SetDiscordRichPresenceAsset('loading')
+    while true do
+        SetDiscordAppId('1092996273721835641')
+        SetDiscordRichPresenceAsset('loading')
         SetDiscordRichPresenceAssetText('RPX Framework')
 
         while not GlobalState.PlayerCount do
@@ -11,7 +11,7 @@ Citizen.CreateThread(function()
         local pName = GetPlayerName(PlayerId())    
         SetRichPresence(GlobalState.PlayerCount.." / "..GlobalState.MaxPlayers.." - ID: "..pId.." | "..pName)
 
-		Citizen.Wait(60000) -- 1 min update
+        Citizen.Wait(60000) -- 1 min update
         PlayerCount = nil
-	end
+    end
 end)

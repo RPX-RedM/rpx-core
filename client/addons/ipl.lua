@@ -99,9 +99,9 @@ Citizen.CreateThread(function()
         local interior = GetInteriorAtCoords(2643.708984375,-1293.3395996094,51.24600982666)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "new_com_bank_int_des") then
-	            --("St Denis Bank Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "new_com_bank_int_des") then
+                --("St Denis Bank Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "new_com_bank_int_des") 
                 --("St Denis Bank Interior Activated")
             end
@@ -110,9 +110,9 @@ Citizen.CreateThread(function()
         local interior = GetInteriorAtCoords(1288.9132080078,-1303.3087158203,77.699859619141)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "rhobank_int_walla") then
-	            --("Rhodes Vault Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "rhobank_int_walla") then
+                --("Rhodes Vault Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "rhobank_int_walla") 
                 --("Rhodes Bank Vault Interior Activated")
             end
@@ -121,116 +121,116 @@ Citizen.CreateThread(function()
         local interior = GetInteriorAtCoords(1342.3599853516,-1374.6173095703,81.0)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "rho_sal_tables01") then
-	            --("Rhodes Saloon Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "rho_sal_tables01") then
+                --("Rhodes Saloon Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "rho_sal_tables01")
                 --("Rhodes Saloon Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(777.28698730469,846.7998046875,117.20547485352)
+        
+        local interior = GetInteriorAtCoords(777.28698730469,846.7998046875,117.20547485352)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "_car_house_int_before_ransack") and IsInteriorEntitySetActive(interior, "_car_house_int_day") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "_car_house_int_before_ransack") and IsInteriorEntitySetActive(interior, "_car_house_int_day") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "_car_house_int_before_ransack")
                 ActivateInteriorEntitySet(interior, "_car_house_int_day")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(-2177.0424804688,718.88171386719,120.86156463623)
+        
+        local interior = GetInteriorAtCoords(-2177.0424804688,718.88171386719,120.86156463623)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "han_int_tables_upright") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "han_int_tables_upright") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "han_int_tables_upright")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(1319.0007324219,-2281.0004882813,51.024421691895)
+        
+        local interior = GetInteriorAtCoords(1319.0007324219,-2281.0004882813,51.024421691895)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "cat_house_propset") and IsInteriorEntitySetActive(interior, "cat_house_lights_ON") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "cat_house_propset") and IsInteriorEntitySetActive(interior, "cat_house_lights_ON") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "cat_house_propset")
                 ActivateInteriorEntitySet(interior, "cat_house_lights_ON")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(-817.17687988281,354.38427734375,96.366539001465)
+        
+        local interior = GetInteriorAtCoords(-817.17687988281,354.38427734375,96.366539001465)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "IntGroup_Downes_before_move") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "IntGroup_Downes_before_move") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "IntGroup_Downes_before_move")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(1786.8262939453,-85.348686218262,55.937133789063)
+        
+        local interior = GetInteriorAtCoords(1786.8262939453,-85.348686218262,55.937133789063)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "clean_abe") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "clean_abe") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "clean_abe")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(-443.90466308594,497.06292724609,97.230682373047)
+        
+        local interior = GetInteriorAtCoords(-443.90466308594,497.06292724609,97.230682373047)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "cas_housewares") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "cas_housewares") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "cas_housewares")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(1134.5697021484,-979.48291015625,69.552551269531)
+        
+        local interior = GetInteriorAtCoords(1134.5697021484,-979.48291015625,69.552551269531)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "LT_murder_before") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "LT_murder_before") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "LT_murder_before")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(2698.0,-1200.0,57.0)
+        
+        local interior = GetInteriorAtCoords(2698.0,-1200.0,57.0)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "new_forMyArt_gallery") and IsInteriorEntitySetActive(interior, "new_forMyArt_paintings") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "new_forMyArt_gallery") and IsInteriorEntitySetActive(interior, "new_forMyArt_paintings") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "new_forMyArt_gallery")
                 ActivateInteriorEntitySet(interior, "new_forMyArt_paintings")
                 --("Interior Activated")
             end
         end
-		
-		local interior = GetInteriorAtCoords(1897.0,-1863.0,44.000003814697)
+        
+        local interior = GetInteriorAtCoords(1897.0,-1863.0,44.000003814697)
         local isValid = IsValidInterior(interior)
         if isValid then
-	        if IsInteriorEntitySetActive(interior, "shb_p_mansion_01") then
-	            --("Interior Already Active")
-	        else
+            if IsInteriorEntitySetActive(interior, "shb_p_mansion_01") then
+                --("Interior Already Active")
+            else
                 ActivateInteriorEntitySet(interior, "shb_p_mansion_01")
                 --("Interior Activated")
             end
         end
-		
+        
         isLoaded = true
     end
 end)
