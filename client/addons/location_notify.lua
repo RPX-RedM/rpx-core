@@ -136,7 +136,7 @@ Citizen.CreateThread(function()
          local time = getIGTime()
          local temp = getIGTemp()
       
-         if zone then
+         if zone and LocalPlayer.state.isLoggedIn then
             print(zone)
             exports[GetCurrentResourceName()]:DisplayTopCenterNotification('~COLOR_BLUE~'.. time ..  temp, zone, 5000)
          end
