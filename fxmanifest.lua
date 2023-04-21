@@ -11,6 +11,8 @@ version '0.0.1'
 --     - QBR-Core @ https://github.com/qbcore-redm-framework/qbr-core
 -- Credits is given where due.
 
+-- The stream folder contains a mod to remove the ability cards used in RDO. It is by MasNana from https://github.com/masnana/ability_card and has been used with express permission.
+
 -- All other parts of this core/framework have been written entirely from scratch, with other frameworks used as inspiration.
 
 shared_scripts {
