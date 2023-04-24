@@ -14,8 +14,9 @@ local lockedDoors = {
     4235597664, -- Amradillo jail cell
 }
 
-CreateThread(function()
-    for _, doorInfo in pairs(DoorSystemGetActive()) do
+RegisterNetEvent("CLIENT:RPX:PlayerLoaded", function()
+    local doorHashes = require 'client.data.doors'
+    for _, doorInfo in pairs(doorHashes) do
         if not IsDoorRegisteredWithSystem(doorInfo[1]) then
             Citizen.InvokeNative(0xD99229FE93B46286, doorInfo[1], 1, 1, 0, 0, 0, 0) -- ADD_DOOR_TO_SYSTEM_NEW
         end

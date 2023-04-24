@@ -63,6 +63,21 @@ RPX.Database.Tables = {
             );
         ]],
     },
+    {
+        name = "horses",
+        query = [[
+            CREATE TABLE IF NOT EXISTS `horses` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `cid` varchar(50) NOT NULL,
+                `selected` int(11) NOT NULL DEFAULT 0,
+                `model` varchar(50) NOT NULL,
+                `name` varchar(50) NOT NULL,
+                `components` longtext NOT NULL DEFAULT '{}',
+                `metadata` longtext NOT NULL DEFAULT '{}',
+                PRIMARY KEY (`id`)
+            );
+        ]],
+    }
 }
 
 CreateThread(function()
