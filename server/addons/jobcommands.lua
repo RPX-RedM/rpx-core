@@ -6,7 +6,7 @@ RegisterCommand("duty", function(source, args)
     if selfExports:HasJobPermission(char.job.name, char.job.rank, "sheriff:general")
     or selfExports:HasJobPermission(char.job.name, char.job.rank, "doctor:general" ) then
         char.SetJobDuty(not char.job.duty)
-        lib.notify(source, {title = "You are now "..(not char.job.duty and "on" or "off").." duty.", type = "success"})
+        lib.notify(source, {title = "You are now "..(char.job.duty and "on" or "off").." duty.", type = "success"})
     end
 end)
 
