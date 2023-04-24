@@ -294,19 +294,3 @@ RPX.Player.GenerateCitizenId = function()
     end
     return CitizenId
 end
-
----Export to check if a player has a job related permission. This prevents having to check for a list of each type of job in each resource.
----@param jobName string
----@param rank number
----@param permission string
----@return boolean
-exports('HasJobPermission', function(jobName, rank, permission)
-    if InternalShared.Jobs[jobName] and InternalShared.Jobs[jobName].Ranks[rank] and InternalShared.Jobs[jobName].Ranks[rank].Permissions then
-        for _, perm in pairs(InternalShared.Jobs[jobName].Ranks[rank].Permissions) do
-            if perm == permission then
-                return true
-            end
-        end
-    end
-    return false
-end)
