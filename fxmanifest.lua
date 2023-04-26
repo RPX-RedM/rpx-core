@@ -55,7 +55,7 @@ ui_page {
 
 files {
     'html/ui.html',
-    'client/data/doors.lua',
+    'client/data/*.lua',
 }
 
 lua54 'yes'
