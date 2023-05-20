@@ -69,6 +69,7 @@ local function SetNoClip(val)
         -- end
         --TriggerEvent('msgprinter:addMessage', ((isNoClipping and ":airplane: No-clip enabled") or ":rock: No-clip disabled"), GetCurrentResourceName());
         if (isNoClipping) then
+            lib.notify({title = "Noclip Enabled", message = "Noclip Enabled", type = "success"})
             TriggerEvent('instructor:add-instruction', {MOVE_LEFT_RIGHT, MOVE_UP_DOWN}, "move", RESSOURCE_NAME);
             TriggerEvent('instructor:add-instruction', {MOVE_UP_KEY, MOVE_DOWN_KEY}, "move up/down", RESSOURCE_NAME);
             TriggerEvent('instructor:add-instruction', {1, 2}, "Turn", RESSOURCE_NAME);
@@ -129,6 +130,7 @@ local function SetNoClip(val)
                 end
             end)
         else
+            lib.notify({title = "Noclip Disabled", message = "Noclip Disabled", type = "success"})
             ResetEntityAlpha(noClippingEntity)
             TriggerEvent('instructor:flush', RESSOURCE_NAME);
         end
@@ -152,6 +154,6 @@ AddEventHandler('onResourceStop', function(resourceName)
     end
 end)
 
-RegisterNetEvent('client:ToggleNoClip', function()
+RegisterNetEvent('client:ToggleNoclip', function()
     ToggleNoClipMode()
 end)
