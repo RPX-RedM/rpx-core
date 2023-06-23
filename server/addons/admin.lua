@@ -456,3 +456,15 @@ RegisterCommand("removebankmoney", function(source, args, rawCommand)
         end
     end
 end)
+
+RegisterCommand("noclip", function(source, args, rawCommand)
+    local Player = RPX.GetPlayer(source)
+    if not Player then return end
+    if Player then
+        if Player.permissiongroup == "admin" or Player.permissiongroup == "superadmin" then
+            TriggerClientEvent("client:ToggleNoclip", source)
+        else
+            lib.notify(source, { title = "Insufficient permissions.", type = "error" })
+        end
+    end
+end)

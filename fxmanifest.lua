@@ -41,6 +41,7 @@ client_scripts {
     'client/spawnmanager.lua',
     'client/exports.lua',
     'client/functions.lua',
+    'client/noclip.lua',
     'client/events.lua',
     'client/game.lua',
     'client/loops.lua',
