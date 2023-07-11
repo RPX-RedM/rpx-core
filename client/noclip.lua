@@ -123,9 +123,7 @@ local function SetNoClip(val)
                     end
                     while not isNoClipping do
                         Wait(0);
-                        if (not IsPedFalling(clipped)) and (not IsPedRagdoll(clipped)) then
-                            return SetInvincible(false, clipped);
-                        end
+                        return SetInvincible(false, clipped);
                     end
                 end
             end)
