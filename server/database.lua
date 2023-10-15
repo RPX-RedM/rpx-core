@@ -72,8 +72,8 @@ RPX.Database.Tables = {
                 `selected` int(11) NOT NULL DEFAULT 0,
                 `model` varchar(50) NOT NULL,
                 `name` varchar(50) NOT NULL,
-                `components` longtext NOT NULL DEFAULT '{}',
-                `metadata` longtext NOT NULL DEFAULT '{}',
+                `components` varchar(512) NOT NULL DEFAULT '{}',
+                `metadata` varchar(512) NOT NULL DEFAULT '{}',
                 PRIMARY KEY (`id`)
             );
         ]],
