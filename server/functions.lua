@@ -72,6 +72,8 @@ RPX.Permissions.SetPermissionGroup = function(src, group)
     else
         MySQL.Sync.execute("INSERT INTO permissions (`license`, `group`) VALUES (@license, @group)", {["@license"] = license, ["@group"] = group})
     end
+    RPX.Players[src].permissiongroup = group
+    RPX.UpdateStateBags(src)
 end
 
 --- Update state bags for a player.
