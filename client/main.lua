@@ -5,6 +5,9 @@ RPX.Shared = InternalShared
 RPX.Blip = Internal_BlipLibrary
 RPX.Debug = Internal_DebugLibrary
 RPX.IN = Citizen.InvokeNative
+RPX.PlayerData = function (filter)
+    return LocalPlayer.state.PlayerData?[filter] or LocalPlayer.state.PlayerData
+end
 
 exports('GetObject', function()
     return RPX
