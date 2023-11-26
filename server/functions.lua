@@ -83,11 +83,14 @@ RPX.UpdateStateBags = function(src)
         local PlayerInfo = RPX.Players[src]
         Player(src).state:set("isLoggedIn", true, true)
 
+        local pd = {}
         for key, value in pairs(PlayerInfo) do
             if type(value) ~= "function" then -- Only set state for non-functions. We don't need to propagate functions to the client.
                 Player(src).state:set(key, value, true)
+                pd[key] = value
             end
         end
+        Player(src).state:set('PlayerData', pd, true)
     end
 end
 exports('UpdateStateBags', RPX.UpdateStateBags) -- Export this function so it can be used by other resources without having to use the RPX namespace.
